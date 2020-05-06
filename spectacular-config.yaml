@@ -2,4 +2,14 @@ name: Specmore Demo Catalogue
 description: A demo catalogue of interface specification openly available on the internet.
 spec-files: 
 - repo: OAI/OpenAPI-Specification
+  file-path: examples/v3.0/api-with-examples.yaml
+- repo: OAI/OpenAPI-Specification
+  file-path: examples/v3.0/callback-example.yaml
+- repo: OAI/OpenAPI-Specification
+  file-path: examples/v3.0/link-example.yaml
+- repo: OAI/OpenAPI-Specification
   file-path: examples/v3.0/petstore.yaml
+- repo: OAI/OpenAPI-Specification
+  file-path: examples/v3.0/petstore-expanded.yaml
+- repo: OAI/OpenAPI-Specification
+  file-path: examples/v3.0/uspto.yaml
