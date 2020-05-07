@@ -1,0 +1,302 @@
+openapi: "3.0.1"
+info:
+  version: 1.0.0
+  title: Movie Ratings
+  description: An example API specification that describes a movie rating system
+  contact:
+    name: Specmore Project Team
+  license:
+    name: MIT
+tags:
+  - name: Movie
+  - name: Rating
+paths:
+  /movies:
+    get:
+      description: Returns all movies from the system
+      tags: 
+        - Movie
+      operationId: findMovies
+      parameters:
+        - name: tags
+          in: query
+          description: tags to filter by
+          required: false
+          style: form
+          schema:
+            type: array
+            items:
+              type: string
+        - name: limit
+          in: query
+          description: maximum number of results to return
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: movie response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Movie'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: Creates a new movie in the system. Duplicates are allowed
+      tags: 
+        - Movie
+      operationId: addMovie
+      requestBody:
+        description: Movie to add to the system
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewMovie'
+      responses:
+        '200':
+          description: movie response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movie'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /movies/{id}:
+    get:
+      description: Returns a movie with the given id
+      tags: 
+        - Movie
+      operationId: findMovieById
+      parameters:
+        - name: id
+          in: path
+          description: ID of movie to fetch
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: movie response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movie'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      description: deletes a single movie based on the ID supplied
+      tags: 
+        - Movie
+      operationId: deleteMovie
+      parameters:
+        - name: id
+          in: path
+          description: ID of movie to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: movie deleted
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /ratings:
+    get:
+      description: Returns all ratings from the system
+      tags: 
+        - Rating
+      operationId: findRatings
+      parameters:
+        - name: movieId
+          in: query
+          description: movieId to filter by
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: userName
+          in: query
+          description: movieId to filter by
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: maximum number of results to return
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: rating response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rating'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: Creates a new rating in the system. Duplicates are allowed
+      tags: 
+        - Rating
+      operationId: addRating
+      requestBody:
+        description: Rating to add to the system
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewRating'
+      responses:
+        '200':
+          description: rating response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rating'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /ratings/{id}:
+    get:
+      description: Returns a rating with the given id
+      tags: 
+        - Rating
+      operationId: findRatingById
+      parameters:
+        - name: id
+          in: path
+          description: ID of rating to fetch
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: rating response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rating'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      description: deletes a single rating based on the ID supplied
+      tags: 
+        - Rating
+      operationId: deleteRating
+      parameters:
+        - name: id
+          in: path
+          description: ID of rating to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: rating deleted
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Movie:
+      allOf:
+        - $ref: '#/components/schemas/NewMovie'
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+          required:
+          - id
+    NewMovie:
+      type: object
+      properties:
+        title:
+          type: string
+        tag:
+          type: string
+      required:
+        - title
+    Rating:
+      allOf:
+        - $ref: '#/components/schemas/NewRating'
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+          required:
+          - id
+    NewRating:
+      type: object
+      properties:
+        movieId:
+          type: integer
+          description: The id of the Movie being rated
+          format: int64
+        userName:
+          type: string
+          description: The name of the user creating this rating
+        stars:
+          type: integer
+          description: A star rating between 1 and 5 inclusive. 1 being the worst rating and 5 the highest rating.
+          minimum: 1
+          maximum: 5
+      required:
+        - movieId
+        - userName
+        - stars
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
