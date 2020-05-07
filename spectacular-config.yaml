@@ -1,5 +1,5 @@
 name: Specmore Demo Catalogue
-description: A demo catalogue of interface specification openly available on the internet.
+description: A collection of example interface specifications.
 spec-files: 
 - file-path: specs/movie-ratings.yaml
 - repo: OAI/OpenAPI-Specification
