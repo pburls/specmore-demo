@@ -1,6 +1,6 @@
 openapi: "3.0.1"
 info:
-  version: 1.0.0
+  version: 1.1.0
   title: Movie Ratings
   description: An example API specification that describes a movie rating system
   contact:
@@ -268,8 +268,13 @@ components:
             id:
               type: integer
               format: int64
+            createdAt:
+              type: string
+              format: date-time
+              description: The date and time when this rating was created
           required:
           - id
+          - createdAt
     NewRating:
       type: object
       properties:
