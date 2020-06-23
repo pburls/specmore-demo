@@ -1,6 +1,0 @@
-name: Specmore Demo Catalogue
-description: A collection of example interface specifications.
-spec-files: 
-- file-path: specs/movie-ratings.yaml
-- repo: OAI/OpenAPI-Specification
-  file-path: examples/v3.0/petstore-expanded.yaml
