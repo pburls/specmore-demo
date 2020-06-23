@@ -6,7 +6,7 @@ catalogues:
     interfaces:
       movieRatings:
         specFile:
-          file-path: specs/movie-ratings.yaml
+          filePath: specs/movie-ratings.yaml
   externalExamples:
     title: Opensource Examples
     description: A collection of opensource example OpenAPI interface specifications available on the public internet.
@@ -14,4 +14,4 @@ catalogues:
       petstore:
         specFile:
           repo: OAI/OpenAPI-Specification
-          file-path: examples/v3.0/petstore-expanded.yaml
+          filePath: examples/v3.0/petstore-expanded.yaml
