@@ -3,11 +3,15 @@ catalogues:
   internalExamples:
     title: Spectacular Examples
     description: Example OpenAPI interface specifications for this demo with open change proposals.
-    spec-files: 
-    - file-path: specs/movie-ratings.yaml
+    interfaces:
+      movieRatings:
+        specFile:
+          file-path: specs/movie-ratings.yaml
   externalExamples:
     title: Opensource Examples
     description: A collection of opensource example OpenAPI interface specifications available on the public internet.
-    spec-files: 
-    - repo: OAI/OpenAPI-Specification
-      file-path: examples/v3.0/petstore-expanded.yaml
+    interfaces:
+      petstore:
+        specFile:
+          repo: OAI/OpenAPI-Specification
+          file-path: examples/v3.0/petstore-expanded.yaml
