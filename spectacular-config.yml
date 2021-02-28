@@ -15,3 +15,7 @@ catalogues:
         specFile:
           repo: OAI/OpenAPI-Specification
           filePath: examples/v3.0/petstore-expanded.yaml
+      github-rest-api:
+        specFile:
+          repo: github/rest-api-description
+          filePath: descriptions/api.github.com/api.github.com.yaml
